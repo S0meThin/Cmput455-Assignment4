@@ -24,9 +24,9 @@ class Player(CommandInterface):
         super().__init__()
         self.policy = "random"  # A3 policy used in the simulations
 
-#============================================================================
+# ============================================================================
 # You need to implement or modify the following methods.
-#============================================================================
+# ============================================================================
     def cmd_genmove(self, args: str) -> bool:
         if self.game is None:
             print_error("no game started")
@@ -92,14 +92,15 @@ class Player(CommandInterface):
     def simulate(self, game: HeapGo) -> str:
         moves = game.legal_moves()
         while moves:
-            game.play(random.choices(moves, weights=self.policy_weights(game))[0])
+            game.play(random.choices(
+                moves, weights=self.policy_weights(game))[0])
             moves = game.legal_moves()
 
         return game.winner()
 
-#============================================================================
+# ============================================================================
 # End of functions requiring implementation
-#============================================================================
+# ============================================================================
 
 
 if __name__ == "__main__":

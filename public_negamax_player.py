@@ -24,9 +24,9 @@ class Timeout(Exception):
 
 
 class Player(CommandInterface):
-#============================================================================
-# You need to implement or modify the following methods.
-#============================================================================
+    # ============================================================================
+    # You need to implement or modify the following methods.
+    # ============================================================================
     def cmd_genmove(self, args: str) -> bool:
         if self.game is None:
             print_error("no game started")
@@ -57,7 +57,8 @@ class Player(CommandInterface):
             except Timeout:
                 break
             depth += 1
-        print_error("negamax: completed depth {}, best move {}".format(depth - 1, best_move))
+        print_error("negamax: completed depth {}, best move {}".format(
+            depth - 1, best_move))
         return best_move
 
     def check_time(self) -> None:
@@ -96,9 +97,9 @@ class Player(CommandInterface):
                 return beta  # or value - see failsoft
         return alpha
 
-#============================================================================
+# ============================================================================
 # End of functions requiring implementation
-#============================================================================
+# ============================================================================
 
 
 if __name__ == "__main__":

@@ -25,6 +25,7 @@ Token = Tuple[str, int]
 Heap = List[Token]
 Heaps = List[Heap]
 
+
 def not_yet() -> bool:
     raise NotImplementedError("Command not implemented.")
     return False
@@ -168,7 +169,6 @@ class HeapGo:
 # ============================================================================
 
 
-
 CommandMap = Dict[str, Callable[[str], bool]]
 
 
@@ -185,11 +185,11 @@ class CommandInterface:
             "genmove": self.cmd_genmove,
             "score": self.cmd_score,
             "winner": self.cmd_winner,
-            }
+        }
 
-#============================================================================
+# ============================================================================
 # Command implementations
-#============================================================================
+# ============================================================================
     def cmd_heapgo(self, args: str) -> bool:
         parts = args.split(maxsplit=1)
         if len(parts) != 2:
@@ -251,7 +251,8 @@ class CommandInterface:
         if self.game is None:
             print_error("no game started")
             return False
-        print("b {} w {}".format(self.game.score[BLACK], self.game.score[WHITE]))
+        print("b {} w {}".format(
+            self.game.score[BLACK], self.game.score[WHITE]))
         return True
 
     def cmd_winner(self, args: str) -> bool:
@@ -260,7 +261,8 @@ class CommandInterface:
             return False
         winner = self.game.winner()
         if winner is None:
-            print_error("game not over" if not self.game.game_over() else "draw")
+            print_error(
+                "game not over" if not self.game.game_over() else "draw")
             return False
         print(winner)
         return True
@@ -268,9 +270,9 @@ class CommandInterface:
     def cmd_genmove(self, args: str) -> bool:
         return not_yet()  # implemented by each player program
 
-#============================================================================
+# ============================================================================
 # Command processing
-#============================================================================
+# ============================================================================
     def cmd_help(self, ignore_args: str) -> bool:
         print("\nKnown commands:")
         for cmd in self.commands:
@@ -285,7 +287,8 @@ class CommandInterface:
                 if cmd(cmd_args):
                     status = "= 1"
             except Exception as e:
-                print_error(f"Command {cmd_name} with arguments {cmd_args} failed with exception: {e}")
+                print_error(
+                    f"Command {cmd_name} with arguments {cmd_args} failed with exception: {e}")
         else:
             print_error("Unknown command. Type 'help' for commands.")
         print(status)

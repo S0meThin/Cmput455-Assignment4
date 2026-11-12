@@ -159,7 +159,8 @@ class Player:
         try:
             return int(output[-1])
         except (IndexError, ValueError):
-            raise PlayerError("genmove answer is not a heap number: {}".format(output))
+            raise PlayerError(
+                "genmove answer is not a heap number: {}".format(output))
 
     def close(self) -> None:
         try:
@@ -200,7 +201,8 @@ def play_game(command: str, komi: float, heaps: list,
                 winner, reason = opponent(color), "{} {}".format(color, e)
                 raise
             if not referee.is_legal(move):
-                winner, reason = opponent(color), "{} played illegal move {}".format(color, move)
+                winner, reason = opponent(
+                    color), "{} played illegal move {}".format(color, move)
                 raise PlayerError(reason)
             referee.play(move)
             moves.append(move)
@@ -225,7 +227,8 @@ def play_game(command: str, komi: float, heaps: list,
         "White: {}".format(players[WHITE].name),
         "Winner: {} ({})".format(winner, players[winner].name),
         "Reason: {}".format(reason),
-        "Final score: b {} w {}".format(referee.score[BLACK], referee.score[WHITE]),
+        "Final score: b {} w {}".format(
+            referee.score[BLACK], referee.score[WHITE]),
         "Number of moves: {}".format(len(moves)),
         "Moves: {}".format(" ".join(str(move) for move in moves)),
     ]
